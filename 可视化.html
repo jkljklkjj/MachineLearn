@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Data Visualization</title>
+    <!-- 引入 ECharts -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5"></script>
+</head>
+<body>
+    <!-- 创建一个 ECharts 实例 -->
+    <div id="main" style="width: 600px;height:400px;"></div>
+
+    <script>
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '股票数据'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross'
+                }
+            },
+            legend: {
+                data: ['日K', '成交量']
+            },
+            grid: [
+                {
+                    left: '10%',
+                    right: '10%',
+                    bottom: '30%'
+                },
+                {
+                    left: '10%',
+                    right: '10%',
+                    top: '70%'
+                }
+            ],
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ["2017-03-01", "2017-03-02", "2017-03-03", "2017-03-06", "2017-03-07", "2024-05-22", "2024-05-23", "2024-05-24", "2024-05-27", "2024-05-28"],
+                    scale: true,
+                    boundaryGap : false,
+                    axisLine: {onZero: false},
+                    splitLine: {show: false},
+                    splitNumber: 20,
+                    min: 'dataMin',
+                    max: 'dataMax'
+                },
+                {
+                    type: 'category',
+                    gridIndex: 1,
+                    data: ["2017-03-01", "2017-03-02", "2017-03-03", "2017-03-06", "2017-03-07", "2024-05-22", "2024-05-23", "2024-05-24", "2024-05-27", "2024-05-28"],
+                    scale: true,
+                    boundaryGap : false,
+                    axisLine: {onZero: false},
+                    axisTick: {show: false},
+                    splitLine: {show: false},
+                    axisLabel: {show: false},
+                    splitNumber: 20,
+                    min: 'dataMin',
+                    max: 'dataMax'
+                }
+            ],
+            yAxis: [
+                {
+                    scale: true,
+                    splitArea: {
+                        show: true
+                    }
+                },
+                {
+                    scale: true,
+                    gridIndex: 1,
+                    splitNumber: 2,
+                    axisLabel: {show: false},
+                    axisLine: {show: false},
+                    axisTick: {show: false},
+                    splitLine: {show: false}
+                }
+            ],
+            dataZoom: [
+                {
+                    type: 'inside',
+                    xAxisIndex: [0, 1],
+                    start: 10,
+                    end: 100
+                },
+                {
+                    show: true,
+                    xAxisIndex: [0, 1],
+                    type: 'slider',
+                    top: '85%',
+                    start: 10,
+                    end: 100
+                }
+            ],
+            series: [
+                {
+                    name: '日K',
+                    type: 'candlestick',
+                    data: [[9.49, 9.49, 9.55, 9.47], [9.51, 9.43, 9.54, 9.42], [9.41, 9.40, 9.43, 9.36], [9.40, 9.45, 9.46, 9.39], [9.44, 9.45, 9.46, 9.40], [11.56, 11.56, 11.74, 11.46], [11.53, 11.40, 11.59, 11.37], [11.37, 11.31, 11.49, 11.30], [11.31, 11.51, 11.53, 11.31], [11.50, 11.40, 11.58, 11.36]]
+                },
+                {
+                    name: '成交量',
+                    type: 'bar',
+                    xAxisIndex: 1,
+                    yAxisIndex: 1,
+                    data: [346994, 403629, 342655, 404511, 294673, 2115531, 1841623, 1398276, 1454361, 1204323]
+                }
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+</html>
